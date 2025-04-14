@@ -6,9 +6,9 @@
     // getData()
   })
 
-  let dataPromiseA = getData()
-  console.log(dataPromiseA);
-  let dataPromise = [
+  let dataPromise = getData()
+  console.log(dataPromise);
+  let dataPromiseA = [
     {
         "id": 1,
         "created_at": "2025-04-09T11:21:02.966748+00:00",
@@ -36,7 +36,7 @@ async function getData() {
 
 <main>
   <h1>Supabase test</h1>
-  {#await dataPromiseA then data}
+  {#await dataPromise then data}
     {#each Object.entries(data) as [key, value]}
       {key} {value.first_name}<br>
     {/each}
