@@ -7,21 +7,6 @@
   })
 
   let dataPromise = getData()
-  console.log(dataPromise);
-  let dataPromiseA = [
-    {
-        "id": 1,
-        "created_at": "2025-04-09T11:21:02.966748+00:00",
-        "first_name": "X",
-        "last_name": "Y",
-        "username": "Z",
-        "tester": true,
-        "contacts": [
-            "A",
-            "B"
-        ]
-    }
-]
 
 async function getData() {
   const { data } = await supabase
