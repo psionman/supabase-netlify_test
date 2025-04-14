@@ -14,13 +14,12 @@ async function getData() {
   .select()
   .overrideTypes<Array<{ id: string }>, { merge: false }>()
 
-  console.log(data);
   return data;
 }
 </script>
 
 <main>
-  <h1>Supabase test</h1>
+  <h1>Supabase tests</h1>
   {#await dataPromise then data}
     {#each Object.entries(data) as [key, value]}
       {key} {value.first_name}<br>
