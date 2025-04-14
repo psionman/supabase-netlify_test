@@ -6,8 +6,8 @@
     // getData()
   })
 
-  // let dataPromise = getData()
-  // console.log(dataPromise);
+  let dataPromiseA = getData()
+  console.log(dataPromiseA);
   let dataPromise = [
     {
         "id": 1,
