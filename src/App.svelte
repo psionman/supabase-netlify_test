@@ -36,7 +36,7 @@ async function getData() {
 
 <main>
   <h1>Supabase test</h1>
-  {#await dataPromise then data}
+  {#await dataPromiseA then data}
     {#each Object.entries(data) as [key, value]}
       {key} {value.first_name}<br>
     {/each}
