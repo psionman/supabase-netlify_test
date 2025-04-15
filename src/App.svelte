@@ -12,7 +12,7 @@
 </script>
 
 <main>
-    <h1>Supabase testing</h1>
+    <h1>Supabase testedd</h1>
     {#await dataPromise then data}
         {#each Object.entries(data) as [key, item]}
             {item.first_name} {item.last_name} {item.username}<br>

@@ -18,6 +18,8 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.4"
+    "@supabase/supabase-js": "^2.49.4",
+    "netlify-cli": "^20.0.0",
+    "netlify-lambda": "^2.0.16"
   }
 }
