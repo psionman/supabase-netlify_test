@@ -22,38 +22,35 @@
     let last_name = ''
 
     async function getData() {
+        console.log('getData');
         const { data } = await supabase
         .from('users')
         .select()
         .overrideTypes<Array<{ id: string }>, { merge: false }>()
-        console.log(data);
         return data;
     }
 
     async function addRecord() {
-        console.log('add', username);
-        const { data, error } = await supabase
-        .from('users')
-        .insert(
-          {
+    const record = {
             'username': username,
             'first_name': first_name,
             'last_name': last_name,
-          }
-        )
-        // .eq('username', username)
+    }
+        const { data, error } = await supabase
+        .from('users')
+        .insert(record)
         .select(); // optional — returns the updated row(s)
         if (error) {
           console.error('Error:', error);
         } else {
-          console.log('Record:', data);
+          console.log('addRecord:', record);
         }
         username = ''
         first_name = ''
         last_name = ''
-        getData()
-        return data;
+        // return data;
     }
+    getData()
 </script>
 
 <style>
