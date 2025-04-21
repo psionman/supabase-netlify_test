@@ -14,15 +14,14 @@
     {/await}
 </main>
 
-<script lang="ts">
-    import { supabase } from './supabaseClient'
-    let dataPromise = getData()
-    let username = ''
-    let first_name = ''
-    let last_name = ''
+<script lang='ts'>
+    import { supabase } from './supabaseClient';
+    let dataPromise = getData();
+    let username = '';
+    let first_name = '';
+    let last_name = '';
 
     async function getData() {
-        console.log('getData');
         const { data } = await supabase
         .from('users')
         .select()
@@ -50,7 +49,53 @@
         last_name = ''
         // return data;
     }
-    getData()
+
+// Reference to store our subscription
+let messageSubscription = null;
+
+const setupRealtime = async () => {
+  messageSubscription = supabase
+    .channel('public:users')
+    .on(
+      'postgres_changes',
+      {
+        event: '*',
+        schema: 'public',
+        table: 'users'
+      },
+      (payload) => handleEvent(payload) // function to handle change event
+    )
+    .subscribe((status) => {
+      if (status === 'SUBSCRIBED') {
+        console.log('Realtime connection established');
+      }
+      if (status === 'CHANNEL_ERROR') {
+        console.error('Connection error');
+      }
+      if (status === 'TIMED_OUT') {
+        console.warn('Connection timeout');
+      }
+    });
+
+  // Return cleanup function
+  return () => {
+    if (messageSubscription) {
+      supabase.removeChannel(messageSubscription);
+    }
+  };
+};
+
+// Execute setup and get cleanup function
+// const cleanup = await setupRealtime();
+setupRealtime()
+// Later in application lifecycle
+// cleanup();
+
+function handleEvent(payload) {
+  console.log(payload);
+  dataPromise = getData();
+}
+
 </script>
 
 <style>
